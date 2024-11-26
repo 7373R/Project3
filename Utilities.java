@@ -8,7 +8,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+
+/// Define the Constants
 interface Constants{
+
     //--Resource file
     static final String LocalPath       = System.getProperty("user.dir");
     static final String PATH            = LocalPath + "/resources/";
@@ -18,9 +21,10 @@ interface Constants{
     static final String FILE_T1         = PATH + "T1.png";
     static final String FILE_T2         = PATH + "T2.png";
     static final String FILE_T3         = PATH + "T3.png";
-
     static final String FILE_SONG       = PATH + "Ishikari Lore - Kevin MacLeod.wav";
-    static final String FILE_SFX_GET    = PATH + "success.wav";
+    static final String FILE_SFX_GET_GOOD    = PATH + "success.wav";
+    static final String FILE_SFX_GET_BAD     = PATH + "male_hurt7-48124.wav";
+
     //--Sizes
     static final int FRAME_WIDTH = 1000;
     static final int FRAME_HEIGHT = 700;
@@ -33,6 +37,7 @@ interface Constants{
 
 }
 
+//
 class ImageIcon extends javax.swing.ImageIcon
 {
     public ImageIcon(String fname)  { super(fname); }
@@ -47,10 +52,12 @@ class ImageIcon extends javax.swing.ImageIcon
     }
 }
 
+/// Sound Setting
 class SoundEffect{
     private Clip    clip;
     private FloatControl gainControl;
-
+    
+    //Pre-load all sound files
     public SoundEffect(String filename){
         try {
             java.io.File file = new java.io.File(filename);
@@ -61,9 +68,11 @@ class SoundEffect{
         }catch (Exception e){ e.printStackTrace(); }
     }
 
+    //Play the sound
     public void playOnce()              { clip.setMicrosecondPosition(0); clip.start(); }
     public void playLoop()              { clip.loop(Clip.LOOP_CONTINUOUSLY); }
     public void stop()                  { clip.stop(); }
+    //Set the volume
     public void setVolume(float gain){
         if (gain < 0.0f)  gain = 0.0f;
         if (gain > 1.0f)  gain = 1.0f;
@@ -71,19 +80,24 @@ class SoundEffect{
         gainControl.setValue(dB);
     }
 }
+
+
 ////////////////////////////////////////////////////////////////////
+/// Class for Bowl 
 class BowlLabel extends JLabel
 {
     private MainApplication     parantFrame;
     private ImageIcon           bowlImage;
     private boolean             horizontalMove = true, verticalMove = true;
 
+    //Set position of the image and the size of the bowl
     private int width       = Constants.BOWL_WIDTH;
     private int height      = Constants.BOWL_HEIGHT;
     private int curY        = 500;
     private int curX        = 390;
     private int speed       = 500;
 
+    //Constructor
     public BowlLabel(MainApplication pf){
         parantFrame = pf;
 
@@ -116,6 +130,7 @@ class BowlLabel extends JLabel
     }
 }
 
+/// Class for Topping
 class ToppingLabel extends JLabel
 {
     private     MainApplication     parentFrame;
@@ -126,7 +141,7 @@ class ToppingLabel extends JLabel
 
 
     String []    imageFiles  = { Constants.FILE_T1, Constants.FILE_T2 };
-    String       soundFile   = Constants.FILE_SFX_GET;
+    String []    soundFile   = {Constants.FILE_SFX_GET_BAD, Constants.FILE_SFX_GET_GOOD}; // ADD
     int    []    getPoints   = { -1, 1 };
 
     private int width        = Constants.TOPPING_WIDTH;
@@ -150,7 +165,7 @@ class ToppingLabel extends JLabel
         setIcon(toppingImg);
 
         setBounds(curX, curY, width, height);
-        getSound   = new SoundEffect(soundFile);
+        getSound   = new SoundEffect(soundFile[type]); // ADD
     }
 
     public void playGetSound()          { getSound.playOnce(); }

@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.ActionEvent; // ADD
+import java.awt.event.ActionListener; // ADD
 
 public class MainApplication extends JFrame implements KeyListener {
     private JPanel              contentpane;
-    private JLabel              drawpane;
+    private JLabel              drawpane, timerLabel;
     private JComboBox           combo;
     private JToggleButton       []tb;
     private ButtonGroup         bgroup;
@@ -21,10 +23,17 @@ public class MainApplication extends JFrame implements KeyListener {
 
     private int framewidth  = Constants.FRAME_WIDTH;
     private int frameheight = Constants.FRAME_HEIGHT;
+    private int timeRemaining = 60;
 
+
+    ///////////////////////////////////////////////
+    /// Mian function
     public static void main(String[] args) {
         new MainApplication();
     }
+    //////////////////////////////////////////////
+
+
 
     public MainApplication()
     {
@@ -59,10 +68,38 @@ public class MainApplication extends JFrame implements KeyListener {
         contentpane.add(drawpane, BorderLayout.CENTER);
         drawpane.repaint();
 
+        // Initialize the timer label // ADD
+        timerLabel = new JLabel("Time: " + timeRemaining); // ADD
+        timerLabel.setFont(new Font("Serif", Font.BOLD, 20)); // ADD
+        timerLabel.setBounds(10, 10, 100, 30); // ADD
+        drawpane.add(timerLabel); // ADD
+
         addKeyListener(this);
+        startCountdownTimer(); // ADD
         ToppingThread();
 
     }
+
+    private void startCountdownTimer() { // ADD
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                timeRemaining--;
+                timerLabel.setText("Time: " + timeRemaining);
+                if (timeRemaining <= 0) {
+                    ((Timer) e.getSource()).stop();
+                    gameOver();
+                }
+            }
+        });
+        timer.start();
+    }
+
+    private void gameOver() { /// ADD
+        JOptionPane.showMessageDialog(this, "Time's up! Game Over.");
+        System.exit(0);
+    }
+
 
     public void ToppingThread()
     {
