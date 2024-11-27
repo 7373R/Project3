@@ -34,7 +34,6 @@ public class MainApplication extends JFrame implements KeyListener {
     //////////////////////////////////////////////
 
 
-
     public MainApplication()
     {
         setTitle("Ramen Hunter");
@@ -53,8 +52,8 @@ public class MainApplication extends JFrame implements KeyListener {
 
     public void AddComponents()
     {
-//      backgroundImg = new ImageIcon(Constants.FILE_BGGAME).resize(framewidth, frameheight);
-//      drawpane.setIcon(backgroundImg);
+//        backgroundImg = new ImageIcon(Constants.FILE_BGGAME).resize(framewidth, frameheight);
+//        drawpane.setIcon(backgroundImg);
         drawpane = new JLabel();
         drawpane.setLayout(null);
 
@@ -106,48 +105,45 @@ public class MainApplication extends JFrame implements KeyListener {
         Thread toppingSpawner = new Thread(){
             public void run(){
                 while (true){
-                    ToppingLabel toppingLabel = new ToppingLabel(currentFrame);
-                    drawpane.add(toppingLabel);
-                    drawpane.repaint();
+                        ToppingLabel toppingLabel = new ToppingLabel(currentFrame);
+                        drawpane.add(toppingLabel);
+                        drawpane.repaint();
 
-                    //Start a new thread to animate each topping's fall
-                    Thread toppingFallingThread = new Thread(){
-                        public void run()
-                        {
-                            while (!toppingLabel.isGet() && toppingLabel.curY < frameheight) 
+                        //Start a new thread to animate each topping's fall
+                        Thread toppingFallingThread = new Thread(){
+                            public void run()
                             {
+                                while (!toppingLabel.isGet() && toppingLabel.curY < frameheight) {
                                 //Move topping down
                                 toppingLabel.curY += 20;
                                 toppingLabel.setLocation(toppingLabel.curX, toppingLabel.curY);
                                 //Check for intersection
-                                if (bowlLabel.getBounds().intersects(toppingLabel.getBounds())) 
-                                {
+                                if (bowlLabel.getBounds().intersects(toppingLabel.getBounds())) {
                                     toppingLabel.setGet(true);
                                     toppingLabel.playGetSound();
                                     drawpane.remove(toppingLabel);
                                     drawpane.repaint();
                                     break;
-                                }
-                                try{
-                                    Thread.sleep(toppingLabel.speed); //control falling speed
-                                } catch (InterruptedException e){
-                                    e.printStackTrace();
-                                }
                             }
-
-                            //cleanup when topping exits the screen
-                            if (!toppingLabel.isGet()) {
-                                drawpane.remove(toppingLabel);
-                                drawpane.repaint();
+                            try{
+                                Thread.sleep(toppingLabel.speed); //control falling speed
+                            } catch (InterruptedException e){
+                                e.printStackTrace();
                             }
                         }
-                    };
-                
-                    toppingFallingThread.start();
 
-                    //Wait before spawning the next topping
+                        //cleanup when topping exits the screen
+                        if (!toppingLabel.isGet()) {
+                            drawpane.remove(toppingLabel);
+                            drawpane.repaint();
+                        }
+                    }
+                };
+                toppingFallingThread.start();
+
+                //Wait before spawning the next topping
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(1500);
                     } catch (InterruptedException e){
                         e.printStackTrace();
                     }
