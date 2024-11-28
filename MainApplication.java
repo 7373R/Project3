@@ -48,35 +48,37 @@ public class MainApplication extends JFrame implements KeyListener {
         AddComponents();
         setVisible(true);
 
+        
     }
 
+    
     public void AddComponents()
     {
-//        backgroundImg = new ImageIcon(Constants.FILE_BGGAME).resize(framewidth, frameheight);
-//        drawpane.setIcon(backgroundImg);
         drawpane = new JLabel();
         drawpane.setLayout(null);
 
+        
         themeSound = new SoundEffect(Constants.FILE_SONG);
         themeSound.playLoop();
         themeSound.setVolume(0.4f);
 
+        
         bowlLabel = new BowlLabel(currentFrame);
         drawpane.add(bowlLabel);
-
+        
         contentpane.add(drawpane, BorderLayout.CENTER);
         drawpane.repaint();
-
+        
         // Initialize the timer label // ADD
         timerLabel = new JLabel("Time: " + timeRemaining); // ADD
         timerLabel.setFont(new Font("Serif", Font.BOLD, 20)); // ADD
         timerLabel.setBounds(10, 10, 100, 30); // ADD
         drawpane.add(timerLabel); // ADD
 
+
         addKeyListener(this);
         startCountdownTimer(); // ADD
         ToppingThread();
-
     }
 
     private void startCountdownTimer() { // ADD
