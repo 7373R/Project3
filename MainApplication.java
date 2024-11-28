@@ -29,6 +29,7 @@ public class MainApplication extends JFrame implements KeyListener {
     ///////////////////////////////////////////////
     // Main function
     public static void main(String[] args) {
+        System.out.println(Constants.PATH);
         new MainApplication();
     }
     //////////////////////////////////////////////
@@ -116,25 +117,11 @@ public class MainApplication extends JFrame implements KeyListener {
     // Pause the game function
     public void pauseGame() {
         isPaused = !isPaused; // Toggle pause state
-        // System.out.println("Pause state: " + isPaused);
         if (isPaused) {
             if (timeRemaining > 0) {
-                JOptionPane.showMessageDialog(this, "Game Paused");
-                // timer.sleep();
                 themeSound.stop();
                 countdownTimer.stop(); // Pause the timer
-                pauseFrame = new JFrame(); // Initialize pause frame
-                pauseFrame.setSize(300, 200);
-                pauseFrame.setLocationRelativeTo(null);
-                pauseFrame.setVisible(true);
-                JButton resumeButton = new JButton("Resume");
-                resumeButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        pauseGame(); // Resume the game
-                    }
-                });
-                pauseFrame.add(resumeButton);
+                PauseFrame();
             } else {
                 themeSound.stop();
                 countdownTimer.stop(); // Pause the timer
@@ -149,6 +136,57 @@ public class MainApplication extends JFrame implements KeyListener {
                 pauseFrame.dispose(); // Close pause frame
             }
         }
+    }
+
+    public void PauseFrame(){
+        pauseFrame = new JFrame("Game Pause"); // Initialize pause frame
+        pauseFrame.setSize(300, 200);
+        pauseFrame.setLayout(new FlowLayout());
+        pauseFrame.setLocationRelativeTo(null);
+        pauseFrame.setVisible(true);
+
+        // Resume button
+        JButton resumeButton = new JButton("Resume");
+        resumeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pauseGame(); // Resume the game
+                pauseFrame.dispose(); // Close pause frame
+            }
+        });
+        resumeButton.setSize(100, 50);
+        
+        // Main menu button
+        JButton mainMenuButton = new JButton("Main Menu");
+        mainMenuButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                themeSound.stop();
+                countdownTimer.stop(); // Pause the timer
+                pauseFrame.dispose(); // Close pause frame
+                currentFrame.dispose(); // Close current frame
+                System.exit(0); // Exit the program
+            }
+        });
+        mainMenuButton.setSize(100, 50);
+
+        // Display total points and remaining time
+        JLabel totalPointLabel = new JLabel("Total Points: " + totalPoint);
+        totalPointLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        totalPointLabel.setHorizontalAlignment(SwingConstants.CENTER);
+            
+        JLabel remainingTimeLabel = new JLabel("Remaining Time: " + timeRemaining);
+        remainingTimeLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        remainingTimeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                
+        pauseFrame.setLayout(new GridLayout(4, 3));
+
+
+        pauseFrame.add(totalPointLabel);
+        pauseFrame.add(remainingTimeLabel);
+        pauseFrame.add(resumeButton);
+        pauseFrame.add(mainMenuButton);
+        pauseFrame.setVisible(true);
     }
 
     // Key event handling
