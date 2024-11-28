@@ -9,7 +9,7 @@ import java.awt.event.ActionListener; // ADD
  
 public class MainApplication extends JFrame implements KeyListener {
     private JPanel              contentpane;
-    private JLabel              drawpane, timerLabel;
+    private JLabel              drawpane, timerLabel, pointCountLabel;
     private JComboBox           combo;
     private JToggleButton       []tb;
     private ButtonGroup         bgroup;
@@ -23,13 +23,15 @@ public class MainApplication extends JFrame implements KeyListener {
 
     private int framewidth  = Constants.FRAME_WIDTH;
     private int frameheight = Constants.FRAME_HEIGHT;
-    private int timeRemaining = 60;
+    private int timeRemaining = 5;
     private boolean isPaused = false;
     private JFrame pauseFrame; // ADD
     private Timer countdownTimer; // ADD
 
+    private int totalPoint = 0;
 
-// 
+
+
     ///////////////////////////////////////////////
     /// Mian function
     public static void main(String[] args) {
@@ -54,6 +56,7 @@ public class MainApplication extends JFrame implements KeyListener {
         
     }
     
+    //Add components to the frame
     public void AddComponents()
     {
         //    backgroundImg = new ImageIcon(Constants.FILE_BGGAME).resize(framewidth, frameheight);
@@ -70,20 +73,35 @@ public class MainApplication extends JFrame implements KeyListener {
         
         contentpane.add(drawpane, BorderLayout.CENTER);
         drawpane.repaint();
-        
-        // Initialize the timer label // ADD
-        timerLabel = new JLabel("Time: " + timeRemaining); // ADD
-        timerLabel.setFont(new Font("Serif", Font.BOLD, 20)); // ADD
-        timerLabel.setBounds(10, 10, 100, 30); // ADD
-        drawpane.add(timerLabel); // ADD
-
 
         addKeyListener(this);
         startCountdownTimer(); // ADD
         AddTopping();
+        countPoint(0);
     }
 
-    private void startCountdownTimer() { // ADD
+    public void countPoint(int point)
+    {
+            // Initialize the timer labe
+            totalPoint += point;
+            pointCountLabel = new JLabel("Point: " + totalPoint); 
+            pointCountLabel.setFont(new Font("Serif", Font.BOLD, 20)); 
+            pointCountLabel.setBounds(10, 40, 100, 30); 
+            drawpane.add(pointCountLabel);
+            drawpane.repaint();
+    };
+    
+
+    // Countdown timer function
+    private void startCountdownTimer() {
+
+        // Initialize the timer label
+        timerLabel = new JLabel("Time: " + timeRemaining); 
+        timerLabel.setFont(new Font("Serif", Font.BOLD, 20)); 
+        timerLabel.setBounds(10, 10, 100, 30); 
+        drawpane.add(timerLabel); 
+
+        // Initialize the countdown timer
         countdownTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -91,6 +109,7 @@ public class MainApplication extends JFrame implements KeyListener {
                 timerLabel.setText("Time: " + timeRemaining);
                 if (timeRemaining <= 0) {
                     ((Timer) e.getSource()).stop();
+                    PauseGame();
                     gameOver();
                 }
             }
@@ -98,32 +117,40 @@ public class MainApplication extends JFrame implements KeyListener {
         countdownTimer.start();
     }
 
-    private void gameOver() { /// ADD
+    // Game over function
+    private void gameOver() { 
         JOptionPane.showMessageDialog(this, "Time's up! Game Over.");
+        PauseGame();
         System.exit(0);
     }
 
-    
+    //Pause the game function
     public void PauseGame()
     {
         isPaused = !isPaused; // Toggle pause state
         // System.out.println("Pause state: " + isPaused);
         if (isPaused) {
-            // timer.sleep();
-            themeSound.stop();
-            countdownTimer.stop(); // Pause the timer
-            pauseFrame = new JFrame(); // Initialize pause frame
-            pauseFrame.setSize(300, 200);
-            pauseFrame.setLocationRelativeTo(null);
-            pauseFrame.setVisible(true);
-            JButton resumeButton = new JButton("Resume");
-            resumeButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    PauseGame(); // Resume the game
-                }
-            });
-            pauseFrame.add(resumeButton);
+            if(timeRemaining > 0) {
+                JOptionPane.showMessageDialog(this, "Game Paused");
+                // timer.sleep();
+                themeSound.stop();
+                countdownTimer.stop(); // Pause the timer
+                pauseFrame = new JFrame(); // Initialize pause frame
+                pauseFrame.setSize(300, 200);
+                pauseFrame.setLocationRelativeTo(null);
+                pauseFrame.setVisible(true);
+                JButton resumeButton = new JButton("Resume");
+                resumeButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        PauseGame(); // Resume the game
+                    }
+                });
+                pauseFrame.add(resumeButton);
+            }else {
+                themeSound.stop();
+                countdownTimer.stop(); // Pause the timer
+            }
 
         } else {
             // timer.awake();
@@ -136,6 +163,7 @@ public class MainApplication extends JFrame implements KeyListener {
         }
     }
     
+    //Key event handling
     @Override
     public void keyPressed(KeyEvent e) {
         
@@ -157,7 +185,7 @@ public class MainApplication extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {}
     
-
+    //Start a new thread to spawn toppings
     public void AddTopping()
     {
         Thread toppingSpawner = new Thread(){
@@ -208,6 +236,8 @@ public class MainApplication extends JFrame implements KeyListener {
                         toppingLabel.setGet(true);
                         toppingLabel.playGetSound();
                         drawpane.remove(toppingLabel);
+                        drawpane.remove(pointCountLabel);
+                        countPoint(toppingLabel.getPoint());
                         drawpane.repaint();
                         break;
                     }

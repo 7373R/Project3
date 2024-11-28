@@ -45,6 +45,9 @@ class BowlLabel extends JLabel
             setMoveConditions(curX+20, curY, horizontalMove, verticalMove);
         }
     }
+
+    
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -62,7 +65,7 @@ class ToppingLabel extends JLabel
                                             Constants.FILE_SHRIMP1, Constants.FILE_SHRIMP2, Constants.FILE_NARUTO,
                                             Constants.FILE_BOMB, Constants.FILE_POO};
     private     String []   soundFile   = { Constants.FILE_SFX_GET, Constants.FILE_SFX_FAIL};
-    protected   int    []   getPoints   = { -1, 1 };
+    protected   int    []   getPoints   = { 1, -1 };
 
     private int width        = Constants.TOPPING_WIDTH;
     private int height       = Constants.TOPPING_HEIGHT;
