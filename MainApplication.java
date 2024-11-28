@@ -250,7 +250,6 @@ public class MainApplication extends JFrame implements KeyListener {
                 if (!toppingLabel.isGet()) {
                     drawpane.remove(toppingLabel);
                     drawpane.repaint();
-                    System.out.println("Topping exited the screen");
                 }
             }
         };
