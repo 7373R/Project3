@@ -103,7 +103,7 @@ class ToppingLabel extends JLabel
 }
 
 
+public class Topping extends Thread{
+    
 
-
-public class Item {
 }
