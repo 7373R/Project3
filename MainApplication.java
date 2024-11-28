@@ -28,7 +28,7 @@ public class MainApplication extends JFrame implements KeyListener {
     private JFrame pauseFrame; // ADD
 
 
-
+// 
     ///////////////////////////////////////////////
     /// Mian function
     public static void main(String[] args) {
@@ -108,6 +108,7 @@ public class MainApplication extends JFrame implements KeyListener {
         isPaused = !isPaused; // Toggle pause state
         // System.out.println("Pause state: " + isPaused);
         if (isPaused) {
+            // timer.sleep();
             themeSound.stop();
             pauseFrame = new JFrame(); // Initialize pause frame
             pauseFrame.setSize(300, 200);
@@ -123,7 +124,9 @@ public class MainApplication extends JFrame implements KeyListener {
             pauseFrame.add(resumeButton);
 
         } else {
+            // timer.awake();
             themeSound.playLoop();
+            
             if (pauseFrame != null) {
                 pauseFrame.dispose(); // Close pause frame
             }
@@ -171,7 +174,7 @@ public class MainApplication extends JFrame implements KeyListener {
                             e.printStackTrace();
                         }
                     }
-                    // System.out.println("Paused: " + isPaused);
+                    System.out.println("Pause : " + isPaused);
                 }
             }
         };
