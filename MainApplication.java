@@ -26,6 +26,7 @@ public class MainApplication extends JFrame implements KeyListener {
     private int timeRemaining = 60;
     private boolean isPaused = false;
     private JFrame pauseFrame; // ADD
+    private Timer countdownTimer; // ADD
 
 
 // 
@@ -83,7 +84,7 @@ public class MainApplication extends JFrame implements KeyListener {
     }
 
     private void startCountdownTimer() { // ADD
-        Timer timer = new Timer(1000, new ActionListener() {
+        countdownTimer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 timeRemaining--;
@@ -94,7 +95,7 @@ public class MainApplication extends JFrame implements KeyListener {
                 }
             }
         });
-        timer.start();
+        countdownTimer.start();
     }
 
     private void gameOver() { /// ADD
@@ -110,6 +111,7 @@ public class MainApplication extends JFrame implements KeyListener {
         if (isPaused) {
             // timer.sleep();
             themeSound.stop();
+            countdownTimer.stop(); // Pause the timer
             pauseFrame = new JFrame(); // Initialize pause frame
             pauseFrame.setSize(300, 200);
             pauseFrame.setLocationRelativeTo(null);
@@ -126,6 +128,7 @@ public class MainApplication extends JFrame implements KeyListener {
         } else {
             // timer.awake();
             themeSound.playLoop();
+            countdownTimer.start(); // Resume the timer
             
             if (pauseFrame != null) {
                 pauseFrame.dispose(); // Close pause frame
@@ -169,12 +172,16 @@ public class MainApplication extends JFrame implements KeyListener {
                         
                         //Wait before spawning the next topping
                         try {
-                            Thread.sleep(1500);
+                            Thread.sleep(1000);
                         } catch (InterruptedException e){
                             e.printStackTrace();
                         }
                     }
-                    System.out.println("Pause : " + isPaused);
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException e){
+                        e.printStackTrace();
+                    }
                 }
             }
         };
