@@ -23,7 +23,7 @@ public class MainApplication extends JFrame implements KeyListener {
 
     private int framewidth  = Constants.FRAME_WIDTH;
     private int frameheight = Constants.FRAME_HEIGHT;
-    private int timeRemaining = 5;
+    private int timeRemaining = 60;
     private boolean isPaused = false;
     private JFrame pauseFrame; // ADD
     private Timer countdownTimer; // ADD
@@ -109,7 +109,7 @@ public class MainApplication extends JFrame implements KeyListener {
                 timerLabel.setText("Time: " + timeRemaining);
                 if (timeRemaining <= 0) {
                     ((Timer) e.getSource()).stop();
-                    PauseGame();
+                    pauseGame();
                     gameOver();
                 }
             }
@@ -120,12 +120,12 @@ public class MainApplication extends JFrame implements KeyListener {
     // Game over function
     private void gameOver() { 
         JOptionPane.showMessageDialog(this, "Time's up! Game Over.");
-        PauseGame();
+        pauseGame();
         System.exit(0);
     }
 
     //Pause the game function
-    public void PauseGame()
+    public void pauseGame()
     {
         isPaused = !isPaused; // Toggle pause state
         // System.out.println("Pause state: " + isPaused);
@@ -143,7 +143,7 @@ public class MainApplication extends JFrame implements KeyListener {
                 resumeButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        PauseGame(); // Resume the game
+                        pauseGame(); // Resume the game
                     }
                 });
                 pauseFrame.add(resumeButton);
@@ -175,7 +175,7 @@ public class MainApplication extends JFrame implements KeyListener {
             bowlLabel.moveLeft();
             break;
             case KeyEvent.VK_ESCAPE:
-            PauseGame();
+            pauseGame();
             break;
             
         }
