@@ -221,7 +221,7 @@ public class MainApplication extends JFrame implements KeyListener {
         Thread toppingFallingThread = new Thread(){
             public void run()
             {
-                while (!toppingLabel.isGet() && toppingLabel.curY < frameheight) 
+                while (!toppingLabel.isGet() && toppingLabel.curY < frameheight-150) 
                 {
                     if(!isPaused) {
                         //Move topping down
@@ -232,7 +232,7 @@ public class MainApplication extends JFrame implements KeyListener {
                         toppingLabel.setLocation(toppingLabel.curX, toppingLabel.curY);
                     }
                     //Check for intersection
-                    if (bowlLabel.getBounds().intersects(toppingLabel.getBounds())) {
+                    if (toppingLabel.getBounds().intersects(bowlLabel.getBounds())) {
                         toppingLabel.setGet(true);
                         toppingLabel.playGetSound();
                         drawpane.remove(toppingLabel);
@@ -249,9 +249,10 @@ public class MainApplication extends JFrame implements KeyListener {
                 }
     
                 //cleanup when topping exits the screen
-                if (!toppingLabel.isGet()) {
+                if (!toppingLabel.isGet() ) {
                     drawpane.remove(toppingLabel);
                     drawpane.repaint();
+                    System.out.println("Topping exited the screen");
                 }
             }
         };

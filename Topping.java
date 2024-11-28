@@ -20,7 +20,7 @@ class BowlLabel extends JLabel
 
         bowlImage = new project3.ImageIcon(Constants.FILE_BOWL).resize(width, height);
         setIcon(bowlImage);
-        setBounds(curX, curY, width, height);
+        setBounds(curX, curY, width , height - 70);
     }
 
 //    public void setMoveConditions(boolean hm, boolean vm){
@@ -30,7 +30,7 @@ class BowlLabel extends JLabel
 
     public void setMoveConditions(int x, int y, boolean hm, boolean vm){
         curX = x; curY = y;
-        setBounds(curX, curY, width, height);
+        setBounds(curX, curY, width, height-70);
         //setMoveConditions(hm, vm);
     }
 
@@ -88,7 +88,7 @@ class ToppingLabel extends JLabel
         toppingImg = new project3.ImageIcon(imageFiles[orders]).resize(width, height);
         setIcon(toppingImg);
 
-        setBounds(curX, curY, width, height);
+        setBounds(curX, curY, width, height-30);
         getSound   = new SoundEffect(soundFile[type]);
     }
 
