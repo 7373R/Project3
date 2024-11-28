@@ -47,21 +47,19 @@ public class MainApplication extends JFrame implements KeyListener {
 
         AddComponents();
         setVisible(true);
-
         
     }
-
     
     public void AddComponents()
     {
+            //    backgroundImg = new ImageIcon(Constants.FILE_BGGAME).resize(framewidth, frameheight);
+            //    drawpane.setIcon(backgroundImg);
         drawpane = new JLabel();
         drawpane.setLayout(null);
-
         
         themeSound = new SoundEffect(Constants.FILE_SONG);
         themeSound.playLoop();
         themeSound.setVolume(0.4f);
-
         
         bowlLabel = new BowlLabel(currentFrame);
         drawpane.add(bowlLabel);
