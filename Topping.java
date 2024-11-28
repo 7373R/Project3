@@ -81,7 +81,7 @@ class ToppingLabel extends JLabel {
         orders = rand.nextInt(10);
         if (orders <= 5)
             type = 0;
-        else if (orders <= 7)
+        else if (orders <= 7 && orders > 5)
             type = 1;
         else if (orders == 8)
             type = 2;

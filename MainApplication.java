@@ -6,13 +6,13 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent; // ADD
 import java.awt.event.ActionListener; // ADD
-
+ 
 public class MainApplication extends JFrame implements KeyListener {
-    private JPanel contentpane;
-    private JLabel drawpane, timerLabel, pointCountLabel;
-    private ImageIcon backgroundImg;
-    private SoundEffect themeSound;
-    private BowlLabel bowlLabel;
+    private JPanel              contentpane;
+    private JLabel              drawpane, timerLabel, pointCountLabel;
+    private ImageIcon           backgroundImg;
+    private SoundEffect         themeSound;
+    private BowlLabel           bowlLabel;
 
     private MainApplication currentFrame;
 
@@ -45,23 +45,23 @@ public class MainApplication extends JFrame implements KeyListener {
 
         AddComponents();
         setVisible(true);
-
+        
     }
-
+    
     // Add components to the frame
     public void AddComponents() {
         backgroundImg = new ImageIcon(Constants.FILE_BGGAME).resize(framewidth, frameheight);
         drawpane = new JLabel();
         drawpane.setIcon(backgroundImg);
         drawpane.setLayout(null);
-
+        
         themeSound = new SoundEffect(Constants.FILE_SONG);
         themeSound.playLoop();
         themeSound.setVolume(0.4f);
-
+        
         bowlLabel = new BowlLabel(currentFrame);
         drawpane.add(bowlLabel);
-
+        
         contentpane.add(drawpane, BorderLayout.CENTER);
         drawpane.repaint();
 
@@ -176,7 +176,7 @@ public class MainApplication extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
     }
-
+    
     // Start a new thread to spawn toppings
     public void AddTopping() {
         Thread toppingSpawner = new Thread() {
@@ -187,7 +187,7 @@ public class MainApplication extends JFrame implements KeyListener {
                         drawpane.add(toppingLabel);
                         drawpane.repaint();
                         ToppingFall(toppingLabel);
-
+                        
                         // Wait before spawning the next topping
                         try {
                             Thread.sleep(1000);
@@ -205,7 +205,7 @@ public class MainApplication extends JFrame implements KeyListener {
         };
         toppingSpawner.start();
     }
-
+    
     // Start a new thread to animate each topping's falling
     public void ToppingFall(ToppingLabel toppingLabel) {
         Thread toppingFallingThread = new Thread() {
@@ -245,7 +245,7 @@ public class MainApplication extends JFrame implements KeyListener {
                         e.printStackTrace();
                     }
                 }
-
+    
                 // cleanup when topping exits the screen
                 if (!toppingLabel.isGet()) {
                     drawpane.remove(toppingLabel);
