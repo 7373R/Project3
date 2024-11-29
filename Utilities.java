@@ -9,8 +9,10 @@ import java.nio.file.Path;
 
 interface Constants {
     // --Resource file
-    // static final String LocalPath = System.getProperty("user.dir");
+
+    // static final String PATH = System.getProperty("user.dir") + "/resources/";
     static final String PATH = "project3/src/main/java/project3/resources/";
+
     static final String FILE_BGMAIN = PATH + "ramen_restaurant.jpg";
     static final String FILE_BGGAME = PATH + "GameBG.png";
     static final String FILE_BOWL = PATH + "bowl.png";
