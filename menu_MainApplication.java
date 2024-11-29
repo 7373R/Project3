@@ -26,13 +26,13 @@ class MainMenu extends JFrame {
         private JPanel optionPanel;
         private JPanel creditPanel;
         private JPanel radioPanel;
-
-        private JLabel titleLabel;
         private JLabel optionLabel;
         private JLabel volumeLabel;
         private JLabel musicLabel;
         private JLabel creditsLabel;
         private JLabel logoLabel;
+
+        private JComboBox musicCombo;
 
         private JButton playButton;
         private JButton optionButton;
@@ -41,7 +41,7 @@ class MainMenu extends JFrame {
         private JButton BackButton_1;
         private JButton BackButton_2;
 
-        private JRadioButton music1, music2;
+        private JRadioButton music1, music2, music3, music4, music5;
 
         private ButtonGroup musicGroup;
 
@@ -261,7 +261,7 @@ class MainMenu extends JFrame {
 
                 // Radio Panel
                 radioPanel = new JPanel();
-                radioPanel.setMaximumSize(new Dimension(600, 55));
+                radioPanel.setMaximumSize(new Dimension(1000, 55));
                 radioPanel.setOpaque(false);
                 radioPanel.setLayout(new FlowLayout());
 
@@ -272,35 +272,77 @@ class MainMenu extends JFrame {
                 musicLabel.setFont(mediumFont);
                 musicLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-                // RadioButton
-                music1 = new JRadioButton("Music_1");
-                music1.setFont(smallFont);
-                music1.setOpaque(false);
-                music1.setSelected(true);
-                music1.setFocusable(false);
-                music1.addItemListener(e -> {
-                        if (e.getStateChange() == ItemEvent.SELECTED) {
-                                music.switchAudio(MyConstants.FILE_MUSIC1);
+                // Combobox
+                String[] musicList = { "music_1", "music_2", "music_3", "music_4", "music_5" };
+                musicCombo = new JComboBox<>(musicList);
+                musicCombo.setSelectedIndex(0);
+                musicCombo.setFont(smallFont);
+                musicCombo.setOpaque(false);
+                musicCombo.setFocusable(false);
+                musicCombo.addActionListener(e -> {
+                        int index = musicCombo.getSelectedIndex();
+                        switch (index) {
+                                case 0:
+                                        music.switchAudio(MyConstants.FILE_MUSIC1);
+                                        break;
+                                case 1:
+                                        music.switchAudio(MyConstants.FILE_MUSIC2);
+                                        break;
+                                case 2:
+                                        music.switchAudio(MyConstants.FILE_MUSIC3);
+                                        break;
+                                case 3:
+                                        music.switchAudio(MyConstants.FILE_MUSIC4);
+                                        break;
+                                case 4:
+                                        music.switchAudio(MyConstants.FILE_MUSIC5);
+                                        break;
                         }
                 });
 
-                music2 = new JRadioButton("Music_2");
-                music2.setFont(smallFont);
-                music2.setOpaque(false);
-                music2.setFocusable(false);
-                music2.addItemListener(e -> {
-                        if (e.getStateChange() == ItemEvent.SELECTED) {
-                                music.switchAudio(MyConstants.FILE_MUSIC2);
-                        }
-                });
+                // // RadioButton
+                // music1 = new JRadioButton("Music_1");
+                // music1.setFont(smallFont);
+                // music1.setOpaque(false);
+                // music1.setSelected(true);
+                // music1.setFocusable(false);
+                // music1.addItemListener(e -> {
+                // if (e.getStateChange() == ItemEvent.SELECTED) {
+                // music.switchAudio(MyConstants.FILE_MUSIC1);
+                // }
+                // });
 
-                musicGroup = new ButtonGroup();
-                musicGroup.add(music1);
-                musicGroup.add(music2);
+                // music2 = new JRadioButton("Music_2");
+                // music2.setFont(smallFont);
+                // music2.setOpaque(false);
+                // music2.setFocusable(false);
+                // music2.addItemListener(e -> {
+                // if (e.getStateChange() == ItemEvent.SELECTED) {
+                // music.switchAudio(MyConstants.FILE_MUSIC2);
+                // }
+                // });
+
+                // music3 = new JRadioButton("Music_3");
+                // music3.setFont(smallFont);
+                // music3.setOpaque(false);
+                // music3.setFocusable(false);
+                // music3.addItemListener(e -> {
+                // if (e.getStateChange() == ItemEvent.SELECTED) {
+                // music.switchAudio(MyConstants.FILE_MUSIC3);
+                // }
+                // });
+
+                // musicGroup = new ButtonGroup();
+                // musicGroup.add(music1);
+                // musicGroup.add(music2);
+                // musicGroup.add(music3);
 
                 radioPanel.add(musicLabel);
-                radioPanel.add(music1);
-                radioPanel.add(music2);
+                radioPanel.add(musicCombo);
+
+                // radioPanel.add(music1);
+                // radioPanel.add(music2);
+                // radioPanel.add(music3);
 
                 // Back Button
                 BackButton_1 = new MyButton(MyConstants.FILE_BACK, MyConstants.FILE_BACKPRESSED, buttonSize);

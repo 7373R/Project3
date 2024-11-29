@@ -16,6 +16,9 @@ interface MyConstants {
     // Music files
     static final String FILE_MUSIC1 = PATH + "music1.wav";
     static final String FILE_MUSIC2 = PATH + "music2.wav";
+    static final String FILE_MUSIC3 = PATH + "music3.wav";
+    static final String FILE_MUSIC4 = PATH + "music4.wav";
+    static final String FILE_MUSIC5 = PATH + "music5.wav";
 
     // Panel + BG + Icon + Logo
     static final String FILE_BG = PATH + "mainBG.jpg";
