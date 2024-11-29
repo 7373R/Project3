@@ -5,7 +5,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 import java.awt.*;
-import java.nio.file.Path;
 
 interface Constants {
     // --Resource file
@@ -13,6 +12,7 @@ interface Constants {
     // static final String PATH = System.getProperty("user.dir") + "/resources/";
     static final String PATH = "project3/src/main/java/project3/resources/";
 
+    static final String FILE_ICON = PATH + "Icon.png";
     static final String FILE_BGMAIN = PATH + "ramen_restaurant.jpg";
     static final String FILE_BGGAME = PATH + "GameBG.png";
     static final String FILE_BOWL = PATH + "bowl.png";
@@ -32,6 +32,7 @@ interface Constants {
     static final String FILE_SFX_FAIL = PATH + "nope.wav";
     static final String FLIE_TIME_PLUS = PATH + "plusTime.wav";
     static final String FILE_TIME_LOSS = PATH + "video-game-points-lost.wav";
+    static final String FILE_SFX_EXPLODE = PATH + "explosion-42132.wav";
 
     // --Sizes
     static final int FRAME_WIDTH = 1000;

@@ -61,8 +61,8 @@ class ToppingLabel extends JLabel {
             Constants.FILE_BOMB, Constants.FILE_POO,
             Constants.FILE_PLUSCLOCK, Constants.FILE_MINUSCLOCK };
     private String[] soundFile = { Constants.FILE_SFX_GET, Constants.FILE_SFX_FAIL,
-            Constants.FLIE_TIME_PLUS, Constants.FILE_TIME_LOSS };
-    protected int[] getPoints = { 1, -1, 0, 0 };
+            Constants.FLIE_TIME_PLUS, Constants.FILE_TIME_LOSS, Constants.FILE_SFX_EXPLODE };
+    protected int[] getPoints = { 1, -1, 0, 0, 0 };
 
     private int width = Constants.TOPPING_WIDTH;
     private int height = Constants.TOPPING_HEIGHT;
@@ -81,10 +81,12 @@ class ToppingLabel extends JLabel {
         orders = rand.nextInt(10);
         if (orders <= 5)
             type = 0;
-        else if (orders <= 7 && orders > 5)
+        else if (orders == 7)
             type = 1;
         else if (orders == 8)
             type = 2;
+        else if (orders == 6)
+            type = 4;
         else
             type = 3;
 
