@@ -32,6 +32,7 @@ class MainMenu extends JFrame {
         private JLabel volumeLabel;
         private JLabel musicLabel;
         private JLabel creditsLabel;
+        private JLabel logoLabel;
 
         private JButton playButton;
         private JButton optionButton;
@@ -47,7 +48,8 @@ class MainMenu extends JFrame {
         private JSlider volumeSlider;
 
         private menu_SoundEffects music;
-        // private MyImageIcon BGImg;
+        private ImageIcon iconImg;
+        private ImageIcon logoImg;
 
         private final Font titleFont = new Font("Malgun Gothic", Font.BOLD, 74);
         private final Font largeFont = new Font("Arial", Font.BOLD, 48);
@@ -81,7 +83,7 @@ class MainMenu extends JFrame {
                 bgPanel.setLayout(cardLayout);
                 bgPanel.setBounds(getCenterPosX(500), getCenterPosY(580), 500, 580);
 
-                iconImg = new ImageIcon(MyConstants.FILE_Icon).resize(64, 64);
+                iconImg = new ImageIcon(MyConstants.FILE_ICON).resize(64, 64);
                 setIconImage(iconImg.getImage());
 
                 // BGLabel = new JLabel();
@@ -133,10 +135,15 @@ class MainMenu extends JFrame {
                 mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
                 mainPanel.setOpaque(false);
 
+                // Logo Label
+                logoImg = new ImageIcon(MyConstants.FILE_LOGO).resize(500, 250);
+                logoLabel = new JLabel(new ImageIcon(logoImg.getImage()));
+                logoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
                 // Title Label
-                titleLabel = new OutlineLabel("RAMEN RUSH", Color.ORANGE, Color.BLACK, 4);
-                titleLabel.setFont(titleFont);
-                titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+                // titleLabel = new OutlineLabel("RAMEN RUSH", Color.ORANGE, Color.BLACK, 4);
+                // titleLabel.setFont(titleFont);
+                // titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
                 // Play Button
                 // playButton = new JButton();
@@ -189,15 +196,15 @@ class MainMenu extends JFrame {
                 });
 
                 // Add components to the panel
-                mainPanel.add(Box.createVerticalStrut(100)); // Spacer
-                mainPanel.add(titleLabel);
                 mainPanel.add(Box.createVerticalStrut(40)); // Spacer
+                mainPanel.add(logoLabel);
+                mainPanel.add(Box.createVerticalStrut(15)); // Spacer
                 mainPanel.add(playButton);
-                mainPanel.add(Box.createVerticalStrut(20)); // Spacer
+                mainPanel.add(Box.createVerticalStrut(15)); // Spacer
                 mainPanel.add(optionButton);
-                mainPanel.add(Box.createVerticalStrut(20)); // Spacer
+                mainPanel.add(Box.createVerticalStrut(15)); // Spacer
                 mainPanel.add(creditButton);
-                mainPanel.add(Box.createVerticalStrut(20)); // Spacer
+                mainPanel.add(Box.createVerticalStrut(15)); // Spacer
                 mainPanel.add(exitButton);
                 validate();
         }

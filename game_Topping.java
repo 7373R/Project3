@@ -10,7 +10,7 @@ class BowlLabel extends JLabel {
 
     private int width = Constants.BOWL_WIDTH;
     private int height = Constants.BOWL_HEIGHT;
-    private int curY = 500;
+    private int curY = Constants.FRAME_HEIGHT - Constants.BOWL_HEIGHT;
     private int curX = 390;
 
     public BowlLabel(game_MainApplication pf) {
@@ -59,7 +59,8 @@ class ToppingLabel extends JLabel {
     private String[] imageFiles = { Constants.FILE_EGG, Constants.FILE_PORK, Constants.FILE_SW,
             Constants.FILE_SHRIMP1, Constants.FILE_SHRIMP2, Constants.FILE_NARUTO,
             Constants.FILE_BOMB, Constants.FILE_POO,
-            Constants.FILE_PLUSCLOCK, Constants.FILE_MINUSCLOCK };
+            Constants.FILE_PLUSCLOCK, Constants.FILE_MINUSCLOCK,
+            Constants.FILE_rEGG, Constants.FILE_rPORK, Constants.FILE_rSHRIMPS };
     private String[] soundFile = { Constants.FILE_SFX_GET, Constants.FILE_SFX_FAIL,
             Constants.FLIE_TIME_PLUS, Constants.FILE_TIME_LOSS, Constants.FILE_SFX_EXPLODE };
     protected int[] getPoints = { 1, -1, 0, 0, 0 };
@@ -78,15 +79,15 @@ class ToppingLabel extends JLabel {
         curX = rand.nextInt(10, parentFrame.getWidth() - 100);
         curY = startY;
 
-        orders = rand.nextInt(10);
+        orders = rand.nextInt(13);
         if (orders <= 5)
             type = 0;
-        else if (orders == 7)
+        else if (orders == 6)
+            type = 4;
+        else if (orders == 7 || orders >= 10 && orders <= 12)
             type = 1;
         else if (orders == 8)
             type = 2;
-        else if (orders == 6)
-            type = 4;
         else
             type = 3;
 

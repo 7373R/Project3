@@ -17,10 +17,11 @@ interface MyConstants {
     static final String FILE_MUSIC1 = PATH + "music1.wav";
     static final String FILE_MUSIC2 = PATH + "music2.wav";
 
-    // Panel + BG + Icon
-    static final String FILE_BG = PATH + "GameBG.png";
+    // Panel + BG + Icon + Logo
+    static final String FILE_BG = PATH + "mainBG.jpg";
     static final String FILE_PANELBG = PATH + "PanelBG.png";
-    static final String FILE_Icon = PATH + "Icon.png";
+    static final String FILE_ICON = PATH + "Icon.png";
+    static final String FILE_LOGO = PATH + "Logo.png";
 
     // Buttons
     static final String FILE_PLAY = BUTTONPATH + "play.png";

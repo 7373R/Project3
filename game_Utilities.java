@@ -23,6 +23,9 @@ interface Constants {
     static final String FILE_SHRIMP1 = PATH + "Shrimp.png";
     static final String FILE_SHRIMP2 = PATH + "Shrimps.png";
     static final String FILE_NARUTO = PATH + "Naruto.png";
+    static final String FILE_rPORK = PATH + "rPork.png";
+    static final String FILE_rEGG = PATH + "rEgg.png";
+    static final String FILE_rSHRIMPS = PATH + "rShrimps.png";
     static final String FILE_POO = PATH + "Poo.png";
     static final String FILE_BOMB = PATH + "Bomb.png";
     static final String FILE_PLUSCLOCK = PATH + "Plus.png";
@@ -36,8 +39,8 @@ interface Constants {
     static final String FILE_SFX_EXPLODE = PATH + "explosion-42132.wav";
 
     // --Sizes
-    static final int FRAME_WIDTH = 1000;
-    static final int FRAME_HEIGHT = 700;
+    static final int FRAME_WIDTH = 1366;
+    static final int FRAME_HEIGHT = 768;
 
     static final int BOWL_WIDTH = 200;
     static final int BOWL_HEIGHT = 200;

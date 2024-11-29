@@ -115,10 +115,10 @@ public class game_MainApplication extends JFrame implements KeyListener {
     private void gameOver() {
         if (isBomb) {
             JOptionPane.showMessageDialog(this, "Bomb exploded! Game Over.\n Your total point is: " + totalPoint);
-        } else{
+        } else {
             JOptionPane.showMessageDialog(this, "Time's up! Game Over.\n Your total point is: " + totalPoint);
         }
-        //pauseGame();
+        // pauseGame();
         currentFrame.dispose();
         new MainMenu();
     }
@@ -143,7 +143,7 @@ public class game_MainApplication extends JFrame implements KeyListener {
 
             if (pauseFrame != null) {
                 pauseFrame.dispose(); // Close pause frame
-                
+
             }
         }
     }
@@ -243,7 +243,7 @@ public class game_MainApplication extends JFrame implements KeyListener {
                         }
                     }
                     try {
-                        Thread.sleep(adjustedSpeed);
+                        Thread.sleep(Math.max(100 - (60 - timeRemaining) * 10, 10));
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -261,7 +261,7 @@ public class game_MainApplication extends JFrame implements KeyListener {
                 while (!toppingLabel.isGet() && toppingLabel.curY < frameheight - 150) {
                     if (!isPaused) {
                         // Move topping down
-                        adjustedSpeed = Math.max(toppingLabel.speed - (60 - timeRemaining), 10);
+                        adjustedSpeed = Math.max(toppingLabel.speed - (60 - timeRemaining) * 2, 10);
                         // speed cap
                         toppingLabel.curY += 20;
                         toppingLabel.setLocation(toppingLabel.curX, toppingLabel.curY);
