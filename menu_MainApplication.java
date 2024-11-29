@@ -6,7 +6,6 @@ import java.awt.event.ItemEvent;
 import java.util.Arrays;
 
 public class menu_MainApplication {
-
     public static void main(String[] args) {
         new MainMenu();
     }
