@@ -6,13 +6,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent; // ADD
 import java.awt.event.ActionListener; // ADD
- 
+
 public class MainApplication extends JFrame implements KeyListener {
-    private JPanel              contentpane;
-    private JLabel              drawpane, timerLabel, pointCountLabel;
-    private ImageIcon           backgroundImg;
-    private SoundEffect         themeSound;
-    private BowlLabel           bowlLabel;
+    private JPanel contentpane;
+    private JLabel drawpane, timerLabel, pointCountLabel;
+    private ImageIcon backgroundImg;
+    private ImageIcon iconImg;
+    private SoundEffect themeSound;
+    private BowlLabel bowlLabel;
 
     private MainApplication currentFrame;
 
@@ -25,6 +26,7 @@ public class MainApplication extends JFrame implements KeyListener {
 
     private int totalPoint = 0;
     private int adjustedSpeed = 0;
+    private boolean isBomb = false;
 
     ///////////////////////////////////////////////
     // Main function
@@ -40,29 +42,32 @@ public class MainApplication extends JFrame implements KeyListener {
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         currentFrame = this;
+        iconImg = new ImageIcon(Constants.FILE_ICON).resize(64, 64);
+        setIconImage(iconImg.getImage());
 
         contentpane = (JPanel) getContentPane();
         contentpane.setLayout(new BorderLayout());
 
         AddComponents();
         setVisible(true);
-        
+
     }
-    
+
     // Add components to the frame
     public void AddComponents() {
         backgroundImg = new ImageIcon(Constants.FILE_BGGAME).resize(framewidth, frameheight);
         drawpane = new JLabel();
         drawpane.setIcon(backgroundImg);
+
         drawpane.setLayout(null);
-        
+
         themeSound = new SoundEffect(Constants.FILE_SONG);
         themeSound.playLoop();
         themeSound.setVolume(0.4f);
-        
+
         bowlLabel = new BowlLabel(currentFrame);
         drawpane.add(bowlLabel);
-        
+
         contentpane.add(drawpane, BorderLayout.CENTER);
         drawpane.repaint();
 
@@ -109,7 +114,10 @@ public class MainApplication extends JFrame implements KeyListener {
 
     // Game over function
     private void gameOver() {
-        JOptionPane.showMessageDialog(this, "Time's up! Game Over.");
+        if (isBomb) {
+            JOptionPane.showMessageDialog(this, "Bomb exploded! \nGame Over.");
+        } else
+            JOptionPane.showMessageDialog(this, "Time's up! Game Over.");
         pauseGame();
         System.exit(0);
     }
@@ -138,7 +146,7 @@ public class MainApplication extends JFrame implements KeyListener {
         }
     }
 
-    public void PauseFrame(){
+    public void PauseFrame() {
         pauseFrame = new JFrame("Game Pause"); // Initialize pause frame
         pauseFrame.setSize(300, 200);
         pauseFrame.setLayout(new FlowLayout());
@@ -155,7 +163,7 @@ public class MainApplication extends JFrame implements KeyListener {
             }
         });
         resumeButton.setSize(100, 50);
-        
+
         // Main menu button
         JButton mainMenuButton = new JButton("Main Menu");
         mainMenuButton.addActionListener(new ActionListener() {
@@ -174,13 +182,12 @@ public class MainApplication extends JFrame implements KeyListener {
         JLabel totalPointLabel = new JLabel("Total Points: " + totalPoint);
         totalPointLabel.setFont(new Font("Serif", Font.BOLD, 20));
         totalPointLabel.setHorizontalAlignment(SwingConstants.CENTER);
-            
+
         JLabel remainingTimeLabel = new JLabel("Remaining Time: " + timeRemaining);
         remainingTimeLabel.setFont(new Font("Serif", Font.BOLD, 20));
         remainingTimeLabel.setHorizontalAlignment(SwingConstants.CENTER);
-                
-        pauseFrame.setLayout(new GridLayout(4, 3));
 
+        pauseFrame.setLayout(new GridLayout(4, 3));
 
         pauseFrame.add(totalPointLabel);
         pauseFrame.add(remainingTimeLabel);
@@ -214,7 +221,7 @@ public class MainApplication extends JFrame implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
     }
-    
+
     // Start a new thread to spawn toppings
     public void AddTopping() {
         Thread toppingSpawner = new Thread() {
@@ -225,7 +232,7 @@ public class MainApplication extends JFrame implements KeyListener {
                         drawpane.add(toppingLabel);
                         drawpane.repaint();
                         ToppingFall(toppingLabel);
-                        
+
                         // Wait before spawning the next topping
                         try {
                             Thread.sleep(1000);
@@ -234,7 +241,7 @@ public class MainApplication extends JFrame implements KeyListener {
                         }
                     }
                     try {
-                        Thread.sleep(500);
+                        Thread.sleep(adjustedSpeed);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -243,11 +250,12 @@ public class MainApplication extends JFrame implements KeyListener {
         };
         toppingSpawner.start();
     }
-    
+
     // Start a new thread to animate each topping's falling
     public void ToppingFall(ToppingLabel toppingLabel) {
         Thread toppingFallingThread = new Thread() {
             public void run() {
+
                 while (!toppingLabel.isGet() && toppingLabel.curY < frameheight - 150) {
                     if (!isPaused) {
                         // Move topping down
@@ -266,6 +274,14 @@ public class MainApplication extends JFrame implements KeyListener {
                         drawpane.remove(pointCountLabel);
                         countPoint(toppingLabel.getPoint());
 
+                        if (toppingLabel.getOrder() == 6) {
+                            isBomb = true;
+                            timeRemaining = -1;
+                            pauseGame();
+                            gameOver();
+                            return;
+                        }
+
                         // Adjust time based on topping order
                         if (toppingLabel.getOrder() == 8) {
                             timeRemaining += 5; // Add 5 seconds
@@ -283,7 +299,7 @@ public class MainApplication extends JFrame implements KeyListener {
                         e.printStackTrace();
                     }
                 }
-    
+
                 // cleanup when topping exits the screen
                 if (!toppingLabel.isGet()) {
                     drawpane.remove(toppingLabel);
