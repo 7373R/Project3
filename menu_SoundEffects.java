@@ -15,6 +15,7 @@ public class menu_SoundEffects {
 
     public void stop() {
         musicClip.stop();
+        musicClip.close();
     }
     
     private void playAudio(String fileName) {

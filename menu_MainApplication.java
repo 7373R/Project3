@@ -149,6 +149,8 @@ class MainMenu extends JFrame {
         playButton.addActionListener(e -> {
             game_MainApplication.mainGame();
             currentFrame.dispose();
+            music.stop();
+            music = null;
                 });
         
         // Options Button
