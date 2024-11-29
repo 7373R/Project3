@@ -114,10 +114,11 @@ public class game_MainApplication extends JFrame implements KeyListener {
     // Game over function
     private void gameOver() {
         if (isBomb) {
-            JOptionPane.showMessageDialog(this, "Bomb exploded! \nGame Over.");
-        } else
-            JOptionPane.showMessageDialog(this, "Time's up! Game Over.");
-        pauseGame();
+            JOptionPane.showMessageDialog(this, "Bomb exploded! Game Over.\n Your total point is: " + totalPoint);
+        } else{
+            JOptionPane.showMessageDialog(this, "Time's up! Game Over.\n Your total point is: " + totalPoint);
+        }
+        //pauseGame();
         currentFrame.dispose();
         new MainMenu();
     }
