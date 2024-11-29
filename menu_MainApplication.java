@@ -6,7 +6,6 @@ import java.awt.event.ItemEvent;
 import java.util.Arrays;
 
 public class menu_MainApplication {
-
         public static void main(String[] args) {
                 new MainMenu();
         }
@@ -49,7 +48,6 @@ class MainMenu extends JFrame {
 
         private menu_SoundEffects music;
         // private MyImageIcon BGImg;
-        private ImageIcon iconImg;
 
         private final Font titleFont = new Font("Malgun Gothic", Font.BOLD, 74);
         private final Font largeFont = new Font("Arial", Font.BOLD, 48);
@@ -157,6 +155,8 @@ class MainMenu extends JFrame {
                 playButton.addActionListener(e -> {
                         game_MainApplication.mainGame();
                         currentFrame.dispose();
+                        music.stop();
+                        music = null;
                 });
 
                 // Options Button

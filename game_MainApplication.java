@@ -12,7 +12,7 @@ public class game_MainApplication extends JFrame implements KeyListener {
     private JLabel drawpane, timerLabel, pointCountLabel;
     private ImageIcon backgroundImg;
     private ImageIcon iconImg;
-    // private SoundEffect themeSound;
+    private SoundEffect themeSound;
     private BowlLabel bowlLabel;
 
     private game_MainApplication currentFrame;
@@ -60,9 +60,9 @@ public class game_MainApplication extends JFrame implements KeyListener {
 
         drawpane.setLayout(null);
 
-        // themeSound = new SoundEffect(Constants.FILE_SONG);
-        // themeSound.playLoop();
-        // themeSound.setVolume(0.4f);
+        themeSound = new SoundEffect(Constants.FILE_SONG);
+        themeSound.playLoop();
+        themeSound.setVolume(0.4f);
 
         bowlLabel = new BowlLabel(currentFrame);
         drawpane.add(bowlLabel);
@@ -114,10 +114,11 @@ public class game_MainApplication extends JFrame implements KeyListener {
     // Game over function
     private void gameOver() {
         if (isBomb) {
-            JOptionPane.showMessageDialog(this, "Bomb exploded! \nGame Over.");
-        } else
-            JOptionPane.showMessageDialog(this, "Time's up! Game Over.");
-        pauseGame();
+            JOptionPane.showMessageDialog(this, "Bomb exploded! Game Over.\n Your total point is: " + totalPoint);
+        } else{
+            JOptionPane.showMessageDialog(this, "Time's up! Game Over.\n Your total point is: " + totalPoint);
+        }
+        //pauseGame();
         currentFrame.dispose();
         new MainMenu();
     }
@@ -127,17 +128,17 @@ public class game_MainApplication extends JFrame implements KeyListener {
         isPaused = !isPaused; // Toggle pause state
         if (isPaused) {
             if (timeRemaining > 0) {
-                // themeSound.stop();
+                themeSound.stop();
                 countdownTimer.stop(); // Pause the timer
                 PauseFrame();
             } else {
-                // themeSound.stop();
+                themeSound.stop();
                 countdownTimer.stop(); // Pause the timer
             }
 
         } else {
             // timer.awake();
-            // themeSound.playLoop();
+            themeSound.playLoop();
             countdownTimer.start(); // Resume the timer
 
             if (pauseFrame != null) {
@@ -170,7 +171,7 @@ public class game_MainApplication extends JFrame implements KeyListener {
         mainMenuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // themeSound.stop();
+                themeSound.stop();
                 countdownTimer.stop(); // Pause the timer
                 pauseFrame.dispose(); // Close pause frame
                 currentFrame.dispose(); // Close current frame

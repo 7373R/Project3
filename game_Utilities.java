@@ -28,7 +28,7 @@ interface Constants {
     static final String FILE_PLUSCLOCK = PATH + "Plus.png";
     static final String FILE_MINUSCLOCK = PATH + "Minus.png";
 
-    // static final String FILE_SONG = PATH + "Ishikari Lore - Kevin MacLeod.wav";
+    static final String FILE_SONG = PATH + "Ishikari Lore - Kevin MacLeod.wav";
     static final String FILE_SFX_GET = PATH + "achievement-bell.wav";
     static final String FILE_SFX_FAIL = PATH + "nope.wav";
     static final String FLIE_TIME_PLUS = PATH + "plusTime.wav";
@@ -85,9 +85,9 @@ class SoundEffect {
         clip.start();
     }
 
-    // public void playLoop() {
-    // clip.loop(Clip.LOOP_CONTINUOUSLY);
-    // }
+    public void playLoop() {
+        clip.loop(Clip.LOOP_CONTINUOUSLY);
+    }
 
     public void stop() {
         clip.stop();
