@@ -34,7 +34,7 @@ public class MainApplication extends JFrame implements KeyListener {
     //////////////////////////////////////////////
 
     public MainApplication() {
-        setTitle("Ramen Hunter");
+        setTitle("Ramen Rush");
         setSize(framewidth, frameheight);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -213,8 +213,8 @@ public class MainApplication extends JFrame implements KeyListener {
                 while (!toppingLabel.isGet() && toppingLabel.curY < frameheight - 150) {
                     if (!isPaused) {
                         // Move topping down
-                        adjustedSpeed = Math.max(toppingLabel.speed - (60 - timeRemaining) / 10, 10); // Minimum //
-                                                                                                      // speed cap
+                        adjustedSpeed = Math.max(toppingLabel.speed - (60 - timeRemaining), 10);
+                        // speed cap
                         toppingLabel.curY += 20;
                         toppingLabel.setLocation(toppingLabel.curX, toppingLabel.curY);
                     } else {
