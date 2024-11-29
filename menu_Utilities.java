@@ -8,18 +8,19 @@ import javax.swing.border.*;
 
 interface MyConstants {
 
-    //----- Resource files
-    // static final String PATH = "src/main/java/Project3_6613248/resources/";
-    static final String PATH = System.getProperty("user.dir") + "/resources/";
+    // ----- Resource files
+    static final String PATH = "src/main/java/project3/resources/";
+    // static final String PATH = System.getProperty("user.dir") + "/resources/";
     static final String BUTTONPATH = PATH + "buttons/";
 
     // Music files
     static final String FILE_MUSIC1 = PATH + "music1.wav";
     static final String FILE_MUSIC2 = PATH + "music2.wav";
 
-    // Panel + BG
+    // Panel + BG + Icon
     static final String FILE_BG = PATH + "GameBG.png";
     static final String FILE_PANELBG = PATH + "PanelBG.png";
+    static final String FILE_Icon = PATH + "Icon.png";
 
     // Buttons
     static final String FILE_PLAY = BUTTONPATH + "play.png";
@@ -99,15 +100,15 @@ class MyButton extends JButton {
         setBorderPainted(false);
         setFocusPainted(false);
 
-//        image = icon.getImage();
-//        imageObserver = icon.getImageObserver();
+        // image = icon.getImage();
+        // imageObserver = icon.getImageObserver();
     }
 
-//    @Override
-//    public void paintComponent(Graphics g) {
-//        super.paintComponent(g);
-//        g.drawImage(image, 0, 0, getWidth(), getHeight(), imageObserver);
-//    }
+    // @Override
+    // public void paintComponent(Graphics g) {
+    // super.paintComponent(g);
+    // g.drawImage(image, 0, 0, getWidth(), getHeight(), imageObserver);
+    // }
 }
 
 class OutlineLabel extends JLabel {
@@ -127,11 +128,11 @@ class OutlineLabel extends JLabel {
         setBorder(thickness);
     }
 
-    public OutlineLabel(String text, Color fillColor, Color outlineColor,int thickness) {
+    public OutlineLabel(String text, Color fillColor, Color outlineColor, int thickness) {
         super(text);
         this.thickness = thickness;
         setBorder(thickness);
-        
+
         this.setForeground(fillColor);
         this.outlineColor = outlineColor;
     }
@@ -219,42 +220,44 @@ class OutlineLabel extends JLabel {
 
 }
 
-//class MyTextLabel extends JLabel {
+// class MyTextLabel extends JLabel {
 //
-//    private Color outlineColor;
-//    private int outlineThickness;
+// private Color outlineColor;
+// private int outlineThickness;
 //
-//    public MyTextLabel(String text, Color fillColor, Color outlineColor, int outlineThickness) {
-//        super(text);
-//        this.setForeground(fillColor);
-//        this.outlineColor = outlineColor;
-//        this.outlineThickness = outlineThickness;
-//    }
+// public MyTextLabel(String text, Color fillColor, Color outlineColor, int
+// outlineThickness) {
+// super(text);
+// this.setForeground(fillColor);
+// this.outlineColor = outlineColor;
+// this.outlineThickness = outlineThickness;
+// }
 //
-//    @Override
-//    protected void paintComponent(Graphics g) {
-//        Graphics2D g2d = (Graphics2D) g.create();
-//        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+// @Override
+// protected void paintComponent(Graphics g) {
+// Graphics2D g2d = (Graphics2D) g.create();
+// g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+// RenderingHints.VALUE_ANTIALIAS_ON);
 //
-//        String text = getText();
-//        FontMetrics fm = g2d.getFontMetrics();
-//        int x = 0;
-//        int y = fm.getAscent();
+// String text = getText();
+// FontMetrics fm = g2d.getFontMetrics();
+// int x = 0;
+// int y = fm.getAscent();
 //
-//        // Draw the outline multiple times for a thicker effect
-//        g2d.setColor(outlineColor);
-//        for (int i = -outlineThickness; i <= outlineThickness; i++) {
-//            for (int j = -outlineThickness; j <= outlineThickness; j++) {
-//                if (i != 0 || j != 0) {
-//                    g2d.drawString(text, x + i, y + j);
-//                }
-//            }
-//        }
+// // Draw the outline multiple times for a thicker effect
+// g2d.setColor(outlineColor);
+// for (int i = -outlineThickness; i <= outlineThickness; i++) {
+// for (int j = -outlineThickness; j <= outlineThickness; j++) {
+// if (i != 0 || j != 0) {
+// g2d.drawString(text, x + i, y + j);
+// }
+// }
+// }
 //
-//        // Draw the fill text
-//        g2d.setColor(getForeground());
-//        g2d.drawString(text, x, y);
+// // Draw the fill text
+// g2d.setColor(getForeground());
+// g2d.drawString(text, x, y);
 //
-//        g2d.dispose();
-//    }
-//}
+// g2d.dispose();
+// }
+// }

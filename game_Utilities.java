@@ -9,8 +9,9 @@ import java.awt.*;
 interface Constants {
     // --Resource file
 
-    static final String PATH = System.getProperty("user.dir") + "/resources/";
+    // static final String PATH = System.getProperty("user.dir") + "/resources/";
     // static final String PATH = "project3/src/main/java/project3/resources/";
+    static final String PATH = "src/main/java/project3/resources/";
 
     static final String FILE_ICON = PATH + "Icon.png";
     static final String FILE_BGMAIN = PATH + "ramen_restaurant.jpg";
@@ -85,7 +86,7 @@ class SoundEffect {
     }
 
     // public void playLoop() {
-    //     clip.loop(Clip.LOOP_CONTINUOUSLY);
+    // clip.loop(Clip.LOOP_CONTINUOUSLY);
     // }
 
     public void stop() {
