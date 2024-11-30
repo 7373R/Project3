@@ -160,7 +160,8 @@ class MainMenu extends JFrame {
                 playButton.setMaximumSize(buttonSize);
                 playButton.setAlignmentX(Component.CENTER_ALIGNMENT);
                 playButton.addActionListener(e -> {
-                        game_MainApplication.mainGame();
+                        // game_MainApplication.mainGame();
+                        pre_game.pregame();
                         currentFrame.dispose();
                         music.stop();
                         music = null;

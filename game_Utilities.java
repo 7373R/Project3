@@ -9,27 +9,27 @@ import java.awt.*;
 interface Constants {
     // --Resource file
 
-    // static final String PATH = System.getProperty("user.dir") + "/resources/";
+    static final String PATH = System.getProperty("user.dir") + "/resources/";
     // static final String PATH = "project3/src/main/java/project3/resources/";
-    static final String PATH = "src/main/java/project3/resources/";
+    // static final String PATH = "src/main/java/project3/resources/";
 
     static final String FILE_ICON = PATH + "Icon.png";
     static final String FILE_BGMAIN = PATH + "ramen_restaurant.jpg";
     static final String FILE_BGGAME = PATH + "GameBG.png";
     static final String FILE_BOWL = PATH + "bowl.png";
-    static final String FILE_EGG = PATH + "Egg.png";
-    static final String FILE_PORK = PATH + "Pork.png";
-    static final String FILE_SW = PATH + "Seaweed.png";
-    static final String FILE_SHRIMP1 = PATH + "Shrimp.png";
-    static final String FILE_SHRIMP2 = PATH + "Shrimps.png";
-    static final String FILE_NARUTO = PATH + "Naruto.png";
-    static final String FILE_rPORK = PATH + "rPork.png";
-    static final String FILE_rEGG = PATH + "rEgg.png";
-    static final String FILE_rSHRIMPS = PATH + "rShrimps.png";
-    static final String FILE_POO = PATH + "Poo.png";
-    static final String FILE_BOMB = PATH + "Bomb.png";
-    static final String FILE_PLUSCLOCK = PATH + "Plus.png";
-    static final String FILE_MINUSCLOCK = PATH + "Minus.png";
+    static final String FILE_EGG = PATH + "topping/Egg.png";
+    static final String FILE_PORK = PATH + "topping/Pork.png";
+    static final String FILE_SW = PATH + "topping/Seaweed.png";
+    static final String FILE_SHRIMP1 = PATH + "topping/Shrimp.png";
+    static final String FILE_SHRIMP2 = PATH + "topping/Shrimps.png";
+    static final String FILE_NARUTO = PATH + "topping/Naruto.png";
+    static final String FILE_rPORK = PATH + "topping/rPork.png";
+    static final String FILE_rEGG = PATH + "topping/rEgg.png";
+    static final String FILE_rSHRIMPS = PATH + "topping/rShrimps.png";
+    static final String FILE_POO = PATH + "topping/Poo.png";
+    static final String FILE_BOMB = PATH + "topping/Bomb.png";
+    static final String FILE_PLUSCLOCK = PATH + "topping/Plus.png";
+    static final String FILE_MINUSCLOCK = PATH + "topping/Minus.png";
 
     static final String FILE_SONG = PATH + "Ishikari Lore - Kevin MacLeod.wav";
     static final String FILE_SFX_GET = PATH + "achievement-bell.wav";
