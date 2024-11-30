@@ -1,3 +1,6 @@
+// Ratchaya Haboonmee     ID 6613117
+// Khunpas Chiewsakul     ID 6613248
+// Pornphipat Pholprueksa ID 6613258
 package project3;
 
 import javax.swing.*;
@@ -13,10 +16,12 @@ class BowlLabel extends JLabel {
     private int curY = Constants.FRAME_HEIGHT - Constants.BOWL_HEIGHT;
     private int curX = 390;
 
-    public BowlLabel(game_MainApplication pf) {
+    public BowlLabel(game_MainApplication pf, String imageFile) {
         parantFrame = pf;
 
-        bowlImage = new project3.ImageIcon(Constants.FILE_BOWL).resize(width, height);
+        bowlImage = new project3.ImageIcon(imageFile).resize(width, height);
+        System.out.println(imageFile);
+
         setIcon(bowlImage);
         setBounds(curX, curY, width, height - 70);
     }

@@ -1,3 +1,6 @@
+// Ratchaya Haboonmee     ID 6613117
+// Khunpas Chiewsakul     ID 6613248
+// Pornphipat Pholprueksa ID 6613258
 package project3;
 
 import javax.swing.*;
@@ -9,10 +12,13 @@ import java.awt.event.ActionListener; // ADD
 
 public class game_MainApplication extends JFrame implements KeyListener {
     private JPanel contentpane;
-    private JLabel drawpane, timerLabel, pointCountLabel;
+    private static JLabel drawpane, timerLabel, pointCountLabel, nameLabel;
     private ImageIcon backgroundImg;
     private ImageIcon iconImg;
     private SoundEffect themeSound;
+
+    private String bowlImage;
+    private String namestr;
     private BowlLabel bowlLabel;
 
     private game_MainApplication currentFrame;
@@ -30,12 +36,14 @@ public class game_MainApplication extends JFrame implements KeyListener {
 
     ///////////////////////////////////////////////
     // Main function
-    public static void mainGame() {
-        new game_MainApplication();
+    public static void mainGame(String bowlImg, String name) {
+        new game_MainApplication(bowlImg, name);
     }
     //////////////////////////////////////////////
 
-    public game_MainApplication() {
+    public game_MainApplication(String bowlImg, String name) {
+        bowlImage = bowlImg;
+        namestr = name;
         setTitle("Ramen Rush");
         setSize(framewidth, frameheight);
         setLocationRelativeTo(null);
@@ -46,6 +54,19 @@ public class game_MainApplication extends JFrame implements KeyListener {
 
         contentpane = (JPanel) getContentPane();
         contentpane.setLayout(new BorderLayout());
+
+        // JPanel starterPanel = new JPanel();
+        // starterPanel.setVisible(true);
+        // starterPanel.setBackground(Color.red);
+        //
+        // JButton closeButton = new JButton("Close");
+        // closeButton.addActionListener(e -> {
+        // starterPanel.setVisible(false);
+        // AddComponents();
+        // });
+        //
+        // starterPanel.add(closeButton);
+        // contentpane.add(starterPanel);
 
         AddComponents();
         setVisible(true);
@@ -64,16 +85,26 @@ public class game_MainApplication extends JFrame implements KeyListener {
         themeSound.playLoop();
         themeSound.setVolume(0.4f);
 
-        bowlLabel = new BowlLabel(currentFrame);
+        bowlLabel = new BowlLabel(currentFrame, bowlImage);
         drawpane.add(bowlLabel);
 
         contentpane.add(drawpane, BorderLayout.CENTER);
         drawpane.repaint();
 
-        addKeyListener(this);
+        addKeyListener(currentFrame);
         startCountdownTimer(); // ADD
         AddTopping();
         countPoint(0);
+        showName(namestr);
+
+    }
+
+    public static void showName(String name) {
+        nameLabel = new JLabel("Welcome! " + name);
+        nameLabel.setFont(new Font("Serif", Font.BOLD, 20));
+        nameLabel.setBounds(10, 10, 200, 30);
+        drawpane.add(nameLabel);
+        drawpane.repaint();
     }
 
     public void countPoint(int point) {
@@ -81,7 +112,7 @@ public class game_MainApplication extends JFrame implements KeyListener {
         totalPoint += point;
         pointCountLabel = new JLabel("Point: " + totalPoint);
         pointCountLabel.setFont(new Font("Serif", Font.BOLD, 20));
-        pointCountLabel.setBounds(10, 40, 100, 30);
+        pointCountLabel.setBounds(10, 70, 100, 30);
         drawpane.add(pointCountLabel);
         drawpane.repaint();
     };
@@ -92,7 +123,7 @@ public class game_MainApplication extends JFrame implements KeyListener {
         // Initialize the timer label
         timerLabel = new JLabel("Time: " + timeRemaining);
         timerLabel.setFont(new Font("Serif", Font.BOLD, 20));
-        timerLabel.setBounds(10, 10, 100, 30);
+        timerLabel.setBounds(10, 40, 100, 30);
         drawpane.add(timerLabel);
 
         // Initialize the countdown timer

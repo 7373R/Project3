@@ -1,3 +1,6 @@
+// Ratchaya Haboonmee     ID 6613117
+// Khunpas Chiewsakul     ID 6613248
+// Pornphipat Pholprueksa ID 6613258
 package project3;
 
 import javax.sound.sampled.*;
@@ -5,10 +8,10 @@ import java.io.File;
 import java.io.IOException;
 
 public class menu_SoundEffects {
-    
+
     private Clip musicClip;
     private FloatControl volumeControl;
-    
+
     menu_SoundEffects(String fileName) {
         playAudio(fileName);
     }
@@ -17,10 +20,10 @@ public class menu_SoundEffects {
         musicClip.stop();
         musicClip.close();
     }
-    
+
     private void playAudio(String fileName) {
         try {
-            File musicFile = new File( fileName );
+            File musicFile = new File(fileName);
             if (!musicFile.exists()) {
                 System.out.println("Audio file not found!");
                 return;
@@ -42,7 +45,7 @@ public class menu_SoundEffects {
             e.printStackTrace();
         }
     }
-    
+
     public void switchAudio(String newFileName) {
         if (musicClip != null && musicClip.isOpen()) {
             musicClip.stop(); // Stop the current music
@@ -51,7 +54,7 @@ public class menu_SoundEffects {
 
         playAudio(newFileName); // Play the new audio file
     }
-    
+
     public void setVolume(int sliderValue) {
         if (volumeControl != null) {
             // Adjusted decibel range
@@ -61,9 +64,9 @@ public class menu_SoundEffects {
             // Map slider value (0-100) to adjusted decibel range
             float volume = adjustedMin + (sliderValue / 100f) * (adjustedMax - adjustedMin);
 
-            if (volume <= adjustedMin) 
+            if (volume <= adjustedMin)
                 volume = -80.0f; // Mute (set to -80 dB or lower)
-            
+
             volumeControl.setValue(volume);
         }
     }

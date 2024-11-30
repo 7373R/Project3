@@ -1,7 +1,11 @@
+// Ratchaya Haboonmee     ID 6613117
+// Khunpas Chiewsakul     ID 6613248
+// Pornphipat Pholprueksa ID 6613258
 package project3;
 
 // Interface for keeping constant values
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import java.awt.image.ImageObserver;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -22,7 +26,8 @@ interface MyConstants {
 
     // Panel + BG + Icon + Logo
     static final String FILE_BG = PATH + "mainBG.jpg";
-    static final String FILE_PANELBG = PATH + "PanelBG.png";
+    static final String FILE_PANELBG = PATH + "PanelBG_1.png";
+    static final String FILE_PANELBG_ALT = PATH + "PanelBG_2.png";
     static final String FILE_ICON = PATH + "Icon.png";
     static final String FILE_LOGO = PATH + "Logo.png";
 
@@ -38,6 +43,9 @@ interface MyConstants {
 
     static final String FILE_BACK = BUTTONPATH + "back.png";
     static final String FILE_BACKPRESSED = BUTTONPATH + "backPressed.png";
+
+    static final String FILE_NEXT = BUTTONPATH + "next.png";
+    static final String FILE_NEXTPRESSED = BUTTONPATH + "nextPressed.png";
 
     static final String FILE_CREDITS = BUTTONPATH + "credits.png";
     static final String FILE_CREDITSPRESSED = BUTTONPATH + "creditsPressed.png";
@@ -220,6 +228,40 @@ class OutlineLabel extends JLabel {
 
         super.paint(g);
         forceTransparent = false;
+    }
+
+}
+
+class MyRadioButton extends JRadioButton {
+
+    private String fileName;
+
+    MyRadioButton(String text, String myIcon, Dimension size, JLabel label) {
+        super(text);
+        fileName = myIcon;
+        ImageIcon icon = new MyImageIcon(myIcon).resize(size);
+        ImageIcon labelIcon = new MyImageIcon(myIcon).resize(300, 300);
+
+        setText(text);
+        setIcon(icon);
+        setOpaque(false);
+        setFont(new Font("Arial", Font.BOLD, 24));
+
+        setPreferredSize(new Dimension(size.width + 30, size.height));
+        this.setBackground(Color.orange);
+
+        addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                this.setOpaque(true);
+                label.setIcon(labelIcon);
+            } else {
+                this.setOpaque(false);
+            }
+        });
+    }
+
+    public String returnIcon() {
+        return fileName;
     }
 
 }

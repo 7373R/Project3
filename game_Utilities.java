@@ -1,3 +1,6 @@
+// Ratchaya Haboonmee     ID 6613117
+// Khunpas Chiewsakul     ID 6613248
+// Pornphipat Pholprueksa ID 6613258
 package project3;
 
 import javax.sound.sampled.AudioInputStream;
@@ -17,6 +20,13 @@ interface Constants {
     static final String FILE_BGMAIN = PATH + "ramen_restaurant.jpg";
     static final String FILE_BGGAME = PATH + "GameBG.png";
     static final String FILE_BOWL = PATH + "bowl.png";
+
+    static final String FILE_BOWL_1 = PATH + "bowl_1.png";
+    static final String FILE_BOWL_2 = PATH + "bowl_2.png";
+    static final String FILE_BOWL_3 = PATH + "bowl_3.png";
+    static final String FILE_BOWL_4 = PATH + "bowl_4.png";
+    static final String FILE_RANDOM = PATH + "random.png";
+
     static final String FILE_EGG = PATH + "topping/Egg.png";
     static final String FILE_PORK = PATH + "topping/Pork.png";
     static final String FILE_SW = PATH + "topping/Seaweed.png";
