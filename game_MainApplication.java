@@ -12,7 +12,7 @@ import java.awt.event.ActionListener; // ADD
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class game_MainApplication extends JFrame implements KeyListener, MouseListener {
+public class game_MainApplication extends JFrame implements KeyListener, MouseMotionListener {
     private JPanel contentpane;
     private static JLabel drawpane, timerLabel, pointCountLabel, nameLabel;
     private ImageIcon backgroundImg;
@@ -94,7 +94,7 @@ public class game_MainApplication extends JFrame implements KeyListener, MouseLi
         drawpane.repaint();
 
         addKeyListener(currentFrame);
-        addMouseListener(currentFrame);
+        addMouseMotionListener(currentFrame);
         startCountdownTimer(); // ADD
         AddTopping();
         countPoint(0);
