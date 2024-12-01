@@ -16,6 +16,15 @@ class BowlLabel extends JLabel {
     private int curY = Constants.FRAME_HEIGHT - Constants.BOWL_HEIGHT;
     private int curX = 390;
 
+     @Override
+    public int getWidth() {
+        return width;
+    }
+    
+    public int getCurY() {
+        return curY;
+    }
+
     public BowlLabel(game_MainApplication pf, String imageFile) {
         parantFrame = pf;
 

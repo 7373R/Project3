@@ -345,4 +345,17 @@ public class game_MainApplication extends JFrame implements KeyListener, MouseLi
         };
         toppingFallingThread.start();
     }
+      @Override
+    public void mouseDragged(MouseEvent e) {
+        int newX = e.getXOnScreen() - getLocationOnScreen().x - bowlLabel.getWidth() / 2;
+        if (newX >= 0 && newX <= framewidth - bowlLabel.getWidth())
+        bowlLabel.setLocation(newX, bowlLabel.getCurY());
+
+        repaint();
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
 }
