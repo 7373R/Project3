@@ -13,8 +13,8 @@ import javax.swing.border.*;
 interface MyConstants {
 
     // ----- Resource files
-    // static final String PATH = "src/main/java/project3/resources/";
-    static final String PATH = System.getProperty("user.dir") + "/resources/";
+    static final String PATH = "src/main/java/project3/resources/";
+    //static final String PATH = System.getProperty("user.dir") + "/resources/";
     static final String BUTTONPATH = PATH + "buttons/";
 
     // Music files
